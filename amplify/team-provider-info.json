@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-reactproject6-dev-203022-authRole",
+      "UnauthRoleArn": "arn:aws:iam::310901816315:role/amplify-reactproject6-dev-203022-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::310901816315:role/amplify-reactproject6-dev-203022-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-reactproject6-dev-203022-deployment",
+      "UnauthRoleName": "amplify-reactproject6-dev-203022-unauthRole",
+      "StackName": "amplify-reactproject6-dev-203022",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:310901816315:stack/amplify-reactproject6-dev-203022/3648c980-47fa-11ee-94e0-0a128b26d3fc",
+      "AmplifyAppId": "d10j0dta87rg3i"
+    },
+    "categories": {
+      "auth": {
+        "reactproject6adb48756": {}
+      },
+      "api": {
+        "reactproject6": {}
+      }
+    }
+  }
+}
