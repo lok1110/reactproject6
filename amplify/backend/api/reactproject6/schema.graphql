@@ -7,3 +7,28 @@ type Todo @model {
   name: String!
   description: String
 }
+
+type Note @model {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type LMS @model {
+  id: ID!
+  Date:String
+  Time:String
+  Point_1:String
+  Point_2:String
+  Point_3:String
+  Point_4:String
+  Point_5:String
+  Point_6:String
+  Point_7:String
+  Point_8:String
+  Point_9:String
+  Point_10:String
+  Point_11:String
+  Point_12:String
+  Point_13:String
+}

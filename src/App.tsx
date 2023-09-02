@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import LayoutComponent from './components/Layout';
 import Login from './pages/Login';
 import LMS from './pages/LMS';
+import { Test } from './pages/Test';
 
 export interface IApp {}
 
@@ -22,6 +23,7 @@ const App:React.FunctionComponent<IApp> = (props) =>{
                     <Route index  element={<Home/>}/>
                     <Route path="/login"  element={<Login/>}/>
                     <Route path="/lms"  element={<LMS/>}/>
+                    <Route path="/test"  element={<Test/>}/>
                     <Route path=":number" element={<Profile/>}/>
                 </Route>
             </Routes>
