@@ -20,15 +20,16 @@ import { MobileDrawer } from './MobileDrawer'
 import {Link } from "react-router-dom";
 import { Auth } from 'aws-amplify';
 
-async function checkUserLogin() {
-  try {
-    const user = await Auth.currentAuthenticatedUser();
-    return user.username;
-  } catch (err) {
-    return null;
-  }
-}
+
 export const Navbar = () => {
+  async function checkUserLogin() {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      return user.username;
+    } catch (err) {
+      return null;
+    }
+  }
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
@@ -89,10 +90,10 @@ export const Navbar = () => {
               {username ? (
                   <>
                     <Text color='white'> {username}.</Text>
-                    <Button onClick={handleSignOut}>Sign Out</Button>
+                    <Button onClick={handleSignOut}>Log Out</Button>
                   </>
                 ) : (
-                  <Link to="/login"><Button>Sign In</Button></Link>
+                  <Link to="/login"><Button>Log In</Button></Link>
                 )}
 
 
