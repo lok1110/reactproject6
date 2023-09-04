@@ -21,11 +21,13 @@ import {Link } from "react-router-dom";
 import { Auth } from 'aws-amplify';
 
 
+
 export const Navbar = () => {
   async function checkUserLogin() {
     try {
       const user = await Auth.currentAuthenticatedUser();
       return user.username;
+      
     } catch (err) {
       return null;
     }
@@ -38,7 +40,7 @@ export const Navbar = () => {
       setUsername(user);
     }
     fetchData();
-  }, []);
+  }, );
 
   async function handleSignOut() {
     try {
@@ -48,6 +50,10 @@ export const Navbar = () => {
       console.log('error signing out: ', error);
     }
   }
+
+
+  
+
 
   return (
     <Box as="section" minH="lg">
@@ -66,14 +72,14 @@ export const Navbar = () => {
                 spacing="8"
                 display={{ base: 'none', lg: 'flex' }}
               > <Link to="/Home">
-                <Button>Home</Button>
+                  <Button>Home</Button>
                 </Link>
                 <Link to="/LMS">
-                <Button>LMS</Button>
+                  <Button>LMS</Button>
                 </Link>
                 {/* <DocumentPopover />
                 <Button>History</Button> */}
-            
+
               </ButtonGroup>
             </HStack>
             <HStack spacing={{ base: '2', md: '4' }}>
@@ -84,17 +90,19 @@ export const Navbar = () => {
                 <Input placeholder="Search" variant="filled.accent" />
               </InputGroup>
               <ButtonGroup variant="tertiary.accent" spacing="1">
-    
-              
+
+               
               </ButtonGroup>
+              
               {username ? (
-                  <>
-                    <Text color='white'> {username}.</Text>
-                    <Button onClick={handleSignOut}>Log Out</Button>
-                  </>
-                ) : (
-                  <Link to="/login"><Button>Log In</Button></Link>
-                )}
+                <>
+                  <Text color='white'> {username}.</Text>
+                  <Button onClick={handleSignOut}>Log Out</Button>
+                  
+                </>
+              ) : (
+                <Link to="/login"><Button>Log In</Button></Link>
+              )}
 
 
             </HStack>
