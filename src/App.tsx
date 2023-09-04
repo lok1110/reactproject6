@@ -8,7 +8,7 @@ import Profile from "./pages/Profile";
 import LayoutComponent from './components/Layout';
 import Login from './pages/Login';
 import LMS from './pages/LMS';
-import { Test } from './pages/Test';
+import  Test from './pages/Test';
 
 export interface IApp {}
 

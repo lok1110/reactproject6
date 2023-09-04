@@ -2,33 +2,14 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type Todo @model {
-  id: ID!
-  name: String!
-  description: String
-}
-
-type Note @model {
-  id: ID!
-  name: String!
-  description: String
-}
-
 type LMS @model {
   id: ID!
-  Date:String
-  Time:String
-  Point_1:String
-  Point_2:String
-  Point_3:String
-  Point_4:String
-  Point_5:String
-  Point_6:String
-  Point_7:String
-  Point_8:String
-  Point_9:String
-  Point_10:String
-  Point_11:String
-  Point_12:String
-  Point_13:String
+  Date: String
+  Time: String
+  Points: [Point]
+}
+
+type Point {
+  name: String
+  value: String
 }

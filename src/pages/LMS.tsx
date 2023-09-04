@@ -5,8 +5,8 @@ import {S3ProviderListOutputItem} from "@aws-amplify/storage"
 import "@aws-amplify/ui-react/styles.css"
 import "../App.css"
 import { Container ,Box} from "@chakra-ui/react";
-import { Test } from "./Test";
-
+import  Test from "./Test";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import {
     withAuthenticator,
   } from "@aws-amplify/ui-react";
@@ -38,6 +38,17 @@ function LMS(){
 
     return(
     <>
+
+<Tabs>
+  <TabList>
+    <Tab>Upload csv</Tab>
+    <Tab>Export csv</Tab>
+    <Tab>Check Database</Tab>
+  </TabList>
+
+  <TabPanels>
+    <TabPanel>
+     
     <Container>
         <Box boxSize='20px'></Box>
         <FileUploader
@@ -64,15 +75,26 @@ function LMS(){
         
         {(item,index)=>(
             <>
-            {/* { <Image src={item} alt="" /> } */}
+            
         
-            <h1>{index}</h1>
-            <Test/>
+           
+            
             </>
         )}
         
         </Collection>
     </Container>
+    </TabPanel>
+    <TabPanel>
+      <p>two!</p>
+    </TabPanel>
+    <TabPanel>
+    <Test/>
+    </TabPanel>
+  </TabPanels>
+</Tabs>
+
+
     </>
 
     )
