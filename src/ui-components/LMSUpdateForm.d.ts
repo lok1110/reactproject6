@@ -14,16 +14,19 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type LMSUpdateFormInputValues = {
+    name?: string;
     Date?: string;
     Time?: string;
 };
 export declare type LMSUpdateFormValidationValues = {
+    name?: ValidationFunction<string>;
     Date?: ValidationFunction<string>;
     Time?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type LMSUpdateFormOverridesProps = {
     LMSUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
     Date?: PrimitiveOverrideProps<TextFieldProps>;
     Time?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

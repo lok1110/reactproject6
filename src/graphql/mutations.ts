@@ -2,18 +2,17 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createLMS = /* GraphQL */ `
-  mutation CreateLMS(
-    $input: CreateLMSInput!
-    $condition: ModelLMSConditionInput
+export const createSKGOPointLog = /* GraphQL */ `
+  mutation CreateSKGOPointLog(
+    $input: CreateSKGOPointLogInput!
+    $condition: ModelSKGOPointLogConditionInput
   ) {
-    createLMS(input: $input, condition: $condition) {
+    createSKGOPointLog(input: $input, condition: $condition) {
       id
-      Date
-      Time
-      Points {
-        name
-        value
+      Timestamp
+      PointDetails {
+        PointName
+        Value
         __typename
       }
       createdAt
@@ -22,18 +21,17 @@ export const createLMS = /* GraphQL */ `
     }
   }
 `;
-export const updateLMS = /* GraphQL */ `
-  mutation UpdateLMS(
-    $input: UpdateLMSInput!
-    $condition: ModelLMSConditionInput
+export const updateSKGOPointLog = /* GraphQL */ `
+  mutation UpdateSKGOPointLog(
+    $input: UpdateSKGOPointLogInput!
+    $condition: ModelSKGOPointLogConditionInput
   ) {
-    updateLMS(input: $input, condition: $condition) {
+    updateSKGOPointLog(input: $input, condition: $condition) {
       id
-      Date
-      Time
-      Points {
-        name
-        value
+      Timestamp
+      PointDetails {
+        PointName
+        Value
         __typename
       }
       createdAt
@@ -42,18 +40,17 @@ export const updateLMS = /* GraphQL */ `
     }
   }
 `;
-export const deleteLMS = /* GraphQL */ `
-  mutation DeleteLMS(
-    $input: DeleteLMSInput!
-    $condition: ModelLMSConditionInput
+export const deleteSKGOPointLog = /* GraphQL */ `
+  mutation DeleteSKGOPointLog(
+    $input: DeleteSKGOPointLogInput!
+    $condition: ModelSKGOPointLogConditionInput
   ) {
-    deleteLMS(input: $input, condition: $condition) {
+    deleteSKGOPointLog(input: $input, condition: $condition) {
       id
-      Date
-      Time
-      Points {
-        name
-        value
+      Timestamp
+      PointDetails {
+        PointName
+        Value
         __typename
       }
       createdAt

@@ -57,32 +57,7 @@ function LMS(){
         variation="drop"
         onSuccess={onSuccess}
         />
-        <Collection
-        items={images}
-        type="grid"
-        padding="2rem"
-        maxWidth={"1100px"}
-        margin="0 auto"
-        justifyContent="center"
-        templateColumns={{
-            base:"minmax(0,500px)",
-            medium:"repeat(2,minmax(0,1fr))",
-            large:"repeat(3,minmax(0,1fx))"
-
-        }}
-        gap="small"
-        >   
-        
-        {(item,index)=>(
-            <>
-            
-        
-           
-            
-            </>
-        )}
-        
-        </Collection>
+     
     </Container>
     </TabPanel>
     <TabPanel>

@@ -2,15 +2,16 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateLMS = /* GraphQL */ `
-  subscription OnCreateLMS($filter: ModelSubscriptionLMSFilterInput) {
-    onCreateLMS(filter: $filter) {
+export const onCreateSKGOPointLog = /* GraphQL */ `
+  subscription OnCreateSKGOPointLog(
+    $filter: ModelSubscriptionSKGOPointLogFilterInput
+  ) {
+    onCreateSKGOPointLog(filter: $filter) {
       id
-      Date
-      Time
-      Points {
-        name
-        value
+      Timestamp
+      PointDetails {
+        PointName
+        Value
         __typename
       }
       createdAt
@@ -19,15 +20,16 @@ export const onCreateLMS = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateLMS = /* GraphQL */ `
-  subscription OnUpdateLMS($filter: ModelSubscriptionLMSFilterInput) {
-    onUpdateLMS(filter: $filter) {
+export const onUpdateSKGOPointLog = /* GraphQL */ `
+  subscription OnUpdateSKGOPointLog(
+    $filter: ModelSubscriptionSKGOPointLogFilterInput
+  ) {
+    onUpdateSKGOPointLog(filter: $filter) {
       id
-      Date
-      Time
-      Points {
-        name
-        value
+      Timestamp
+      PointDetails {
+        PointName
+        Value
         __typename
       }
       createdAt
@@ -36,15 +38,16 @@ export const onUpdateLMS = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteLMS = /* GraphQL */ `
-  subscription OnDeleteLMS($filter: ModelSubscriptionLMSFilterInput) {
-    onDeleteLMS(filter: $filter) {
+export const onDeleteSKGOPointLog = /* GraphQL */ `
+  subscription OnDeleteSKGOPointLog(
+    $filter: ModelSubscriptionSKGOPointLogFilterInput
+  ) {
+    onDeleteSKGOPointLog(filter: $filter) {
       id
-      Date
-      Time
-      Points {
-        name
-        value
+      Timestamp
+      PointDetails {
+        PointName
+        Value
         __typename
       }
       createdAt

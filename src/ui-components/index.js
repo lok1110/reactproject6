@@ -4,6 +4,6 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-export { default as LMSCreateForm } from "./LMSCreateForm";
-export { default as LMSUpdateForm } from "./LMSUpdateForm";
+export { default as SKGOPointLogCreateForm } from "./SKGOPointLogCreateForm";
+export { default as SKGOPointLogUpdateForm } from "./SKGOPointLogUpdateForm";
 export { default as studioTheme } from "./studioTheme";

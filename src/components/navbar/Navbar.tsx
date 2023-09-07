@@ -51,10 +51,6 @@ export const Navbar = () => {
     }
   }
 
-
-  
-
-
   return (
     <Box as="section" minH="lg">
       <Box borderBottomWidth="1px" bg="bg.accent.default" position="relative" zIndex="tooltip">
@@ -91,14 +87,14 @@ export const Navbar = () => {
               </InputGroup>
               <ButtonGroup variant="tertiary.accent" spacing="1">
 
-               
+
               </ButtonGroup>
-              
+                
               {username ? (
                 <>
                   <Text color='white'> {username}.</Text>
                   <Button onClick={handleSignOut}>Log Out</Button>
-                  
+
                 </>
               ) : (
                 <Link to="/login"><Button>Log In</Button></Link>
@@ -107,7 +103,7 @@ export const Navbar = () => {
 
             </HStack>
           </HStack>
-          
+
         </Container>
       </Box>
     </Box>

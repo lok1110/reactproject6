@@ -10,8 +10,8 @@ import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { fetchByPath, validateField } from "./utils";
 import { API } from "aws-amplify";
-import { createLMS } from "../graphql/mutations";
-export default function LMSCreateForm(props) {
+import { createSiteLog } from "../graphql/mutations";
+export default function SiteLogCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -23,24 +23,16 @@ export default function LMSCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    name: "",
-    Date: "",
-    Time: "",
+    SiteName: "",
   };
-  const [name, setName] = React.useState(initialValues.name);
-  const [Date, setDate] = React.useState(initialValues.Date);
-  const [Time, setTime] = React.useState(initialValues.Time);
+  const [SiteName, setSiteName] = React.useState(initialValues.SiteName);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setName(initialValues.name);
-    setDate(initialValues.Date);
-    setTime(initialValues.Time);
+    setSiteName(initialValues.SiteName);
     setErrors({});
   };
   const validations = {
-    name: [],
-    Date: [],
-    Time: [],
+    SiteName: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -68,9 +60,7 @@ export default function LMSCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          name,
-          Date,
-          Time,
+          SiteName,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -101,7 +91,7 @@ export default function LMSCreateForm(props) {
             }
           });
           await API.graphql({
-            query: createLMS,
+            query: createSiteLog,
             variables: {
               input: {
                 ...modelFields,
@@ -121,86 +111,32 @@ export default function LMSCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "LMSCreateForm")}
+      {...getOverrideProps(overrides, "SiteLogCreateForm")}
       {...rest}
     >
       <TextField
-        label="Name"
+        label="Site name"
         isRequired={false}
         isReadOnly={false}
-        value={name}
+        value={SiteName}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              name: value,
-              Date,
-              Time,
+              SiteName: value,
             };
             const result = onChange(modelFields);
-            value = result?.name ?? value;
+            value = result?.SiteName ?? value;
           }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
+          if (errors.SiteName?.hasError) {
+            runValidationTasks("SiteName", value);
           }
-          setName(value);
+          setSiteName(value);
         }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
-      ></TextField>
-      <TextField
-        label="Date"
-        isRequired={false}
-        isReadOnly={false}
-        value={Date}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              Date: value,
-              Time,
-            };
-            const result = onChange(modelFields);
-            value = result?.Date ?? value;
-          }
-          if (errors.Date?.hasError) {
-            runValidationTasks("Date", value);
-          }
-          setDate(value);
-        }}
-        onBlur={() => runValidationTasks("Date", Date)}
-        errorMessage={errors.Date?.errorMessage}
-        hasError={errors.Date?.hasError}
-        {...getOverrideProps(overrides, "Date")}
-      ></TextField>
-      <TextField
-        label="Time"
-        isRequired={false}
-        isReadOnly={false}
-        value={Time}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              Date,
-              Time: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.Time ?? value;
-          }
-          if (errors.Time?.hasError) {
-            runValidationTasks("Time", value);
-          }
-          setTime(value);
-        }}
-        onBlur={() => runValidationTasks("Time", Time)}
-        errorMessage={errors.Time?.errorMessage}
-        hasError={errors.Time?.hasError}
-        {...getOverrideProps(overrides, "Time")}
+        onBlur={() => runValidationTasks("SiteName", SiteName)}
+        errorMessage={errors.SiteName?.errorMessage}
+        hasError={errors.SiteName?.hasError}
+        {...getOverrideProps(overrides, "SiteName")}
       ></TextField>
       <Flex
         justifyContent="space-between"

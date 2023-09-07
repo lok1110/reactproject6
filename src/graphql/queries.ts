@@ -2,15 +2,14 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getLMS = /* GraphQL */ `
-  query GetLMS($id: ID!) {
-    getLMS(id: $id) {
+export const getSKGOPointLog = /* GraphQL */ `
+  query GetSKGOPointLog($id: ID!) {
+    getSKGOPointLog(id: $id) {
       id
-      Date
-      Time
-      Points {
-        name
-        value
+      Timestamp
+      PointDetails {
+        PointName
+        Value
         __typename
       }
       createdAt
@@ -19,16 +18,19 @@ export const getLMS = /* GraphQL */ `
     }
   }
 `;
-export const listLMS = /* GraphQL */ `
-  query ListLMS($filter: ModelLMSFilterInput, $limit: Int, $nextToken: String) {
-    listLMS(filter: $filter, limit: $limit, nextToken: $nextToken) {
+export const listSKGOPointLogs = /* GraphQL */ `
+  query ListSKGOPointLogs(
+    $filter: ModelSKGOPointLogFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSKGOPointLogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        Date
-        Time
-        Points {
-          name
-          value
+        Timestamp
+        PointDetails {
+          PointName
+          Value
           __typename
         }
         createdAt

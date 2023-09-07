@@ -6,12 +6,12 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import { Button, Flex, Grid } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { fetchByPath, validateField } from "./utils";
 import { API } from "aws-amplify";
-import { createLMS } from "../graphql/mutations";
-export default function LMSCreateForm(props) {
+import { createSKGO } from "../graphql/mutations";
+export default function SKGOCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -22,26 +22,12 @@ export default function LMSCreateForm(props) {
     overrides,
     ...rest
   } = props;
-  const initialValues = {
-    name: "",
-    Date: "",
-    Time: "",
-  };
-  const [name, setName] = React.useState(initialValues.name);
-  const [Date, setDate] = React.useState(initialValues.Date);
-  const [Time, setTime] = React.useState(initialValues.Time);
+  const initialValues = {};
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setName(initialValues.name);
-    setDate(initialValues.Date);
-    setTime(initialValues.Time);
     setErrors({});
   };
-  const validations = {
-    name: [],
-    Date: [],
-    Time: [],
-  };
+  const validations = {};
   const runValidationTasks = async (
     fieldName,
     currentValue,
@@ -67,11 +53,7 @@ export default function LMSCreateForm(props) {
       padding="20px"
       onSubmit={async (event) => {
         event.preventDefault();
-        let modelFields = {
-          name,
-          Date,
-          Time,
-        };
+        let modelFields = {};
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
@@ -101,7 +83,7 @@ export default function LMSCreateForm(props) {
             }
           });
           await API.graphql({
-            query: createLMS,
+            query: createSKGO,
             variables: {
               input: {
                 ...modelFields,
@@ -121,87 +103,9 @@ export default function LMSCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "LMSCreateForm")}
+      {...getOverrideProps(overrides, "SKGOCreateForm")}
       {...rest}
     >
-      <TextField
-        label="Name"
-        isRequired={false}
-        isReadOnly={false}
-        value={name}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name: value,
-              Date,
-              Time,
-            };
-            const result = onChange(modelFields);
-            value = result?.name ?? value;
-          }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
-          }
-          setName(value);
-        }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
-      ></TextField>
-      <TextField
-        label="Date"
-        isRequired={false}
-        isReadOnly={false}
-        value={Date}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              Date: value,
-              Time,
-            };
-            const result = onChange(modelFields);
-            value = result?.Date ?? value;
-          }
-          if (errors.Date?.hasError) {
-            runValidationTasks("Date", value);
-          }
-          setDate(value);
-        }}
-        onBlur={() => runValidationTasks("Date", Date)}
-        errorMessage={errors.Date?.errorMessage}
-        hasError={errors.Date?.hasError}
-        {...getOverrideProps(overrides, "Date")}
-      ></TextField>
-      <TextField
-        label="Time"
-        isRequired={false}
-        isReadOnly={false}
-        value={Time}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              Date,
-              Time: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.Time ?? value;
-          }
-          if (errors.Time?.hasError) {
-            runValidationTasks("Time", value);
-          }
-          setTime(value);
-        }}
-        onBlur={() => runValidationTasks("Time", Time)}
-        errorMessage={errors.Time?.errorMessage}
-        hasError={errors.Time?.hasError}
-        {...getOverrideProps(overrides, "Time")}
-      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

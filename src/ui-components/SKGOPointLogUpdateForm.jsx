@@ -10,10 +10,12 @@ import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { fetchByPath, validateField } from "./utils";
 import { API } from "aws-amplify";
-import { createLMS } from "../graphql/mutations";
-export default function LMSCreateForm(props) {
+import { getSKGOPointLog } from "../graphql/queries";
+import { updateSKGOPointLog } from "../graphql/mutations";
+export default function SKGOPointLogUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    sKGOPointLog: sKGOPointLogModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -23,24 +25,37 @@ export default function LMSCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    name: "",
-    Date: "",
-    Time: "",
+    Timestamp: "",
   };
-  const [name, setName] = React.useState(initialValues.name);
-  const [Date, setDate] = React.useState(initialValues.Date);
-  const [Time, setTime] = React.useState(initialValues.Time);
+  const [Timestamp, setTimestamp] = React.useState(initialValues.Timestamp);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setName(initialValues.name);
-    setDate(initialValues.Date);
-    setTime(initialValues.Time);
+    const cleanValues = sKGOPointLogRecord
+      ? { ...initialValues, ...sKGOPointLogRecord }
+      : initialValues;
+    setTimestamp(cleanValues.Timestamp);
     setErrors({});
   };
+  const [sKGOPointLogRecord, setSKGOPointLogRecord] = React.useState(
+    sKGOPointLogModelProp
+  );
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? (
+            await API.graphql({
+              query: getSKGOPointLog,
+              variables: { id: idProp },
+            })
+          )?.data?.getSKGOPointLog
+        : sKGOPointLogModelProp;
+      setSKGOPointLogRecord(record);
+    };
+    queryData();
+  }, [idProp, sKGOPointLogModelProp]);
+  React.useEffect(resetStateValues, [sKGOPointLogRecord]);
   const validations = {
-    name: [],
-    Date: [],
-    Time: [],
+    Timestamp: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -59,6 +74,23 @@ export default function LMSCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
+  const convertToLocal = (date) => {
+    const df = new Intl.DateTimeFormat("default", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      calendar: "iso8601",
+      numberingSystem: "latn",
+      hourCycle: "h23",
+    });
+    const parts = df.formatToParts(date).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  };
   return (
     <Grid
       as="form"
@@ -68,9 +100,7 @@ export default function LMSCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          name,
-          Date,
-          Time,
+          Timestamp,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -101,18 +131,16 @@ export default function LMSCreateForm(props) {
             }
           });
           await API.graphql({
-            query: createLMS,
+            query: updateSKGOPointLog,
             variables: {
               input: {
+                id: sKGOPointLogRecord.id,
                 ...modelFields,
               },
             },
           });
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -121,99 +149,48 @@ export default function LMSCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "LMSCreateForm")}
+      {...getOverrideProps(overrides, "SKGOPointLogUpdateForm")}
       {...rest}
     >
       <TextField
-        label="Name"
-        isRequired={false}
+        label="Timestamp"
+        isRequired={true}
         isReadOnly={false}
-        value={name}
+        type="datetime-local"
+        value={Timestamp && convertToLocal(new Date(Timestamp))}
         onChange={(e) => {
-          let { value } = e.target;
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
-              name: value,
-              Date,
-              Time,
+              Timestamp: value,
             };
             const result = onChange(modelFields);
-            value = result?.name ?? value;
+            value = result?.Timestamp ?? value;
           }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
+          if (errors.Timestamp?.hasError) {
+            runValidationTasks("Timestamp", value);
           }
-          setName(value);
+          setTimestamp(value);
         }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
-      ></TextField>
-      <TextField
-        label="Date"
-        isRequired={false}
-        isReadOnly={false}
-        value={Date}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              Date: value,
-              Time,
-            };
-            const result = onChange(modelFields);
-            value = result?.Date ?? value;
-          }
-          if (errors.Date?.hasError) {
-            runValidationTasks("Date", value);
-          }
-          setDate(value);
-        }}
-        onBlur={() => runValidationTasks("Date", Date)}
-        errorMessage={errors.Date?.errorMessage}
-        hasError={errors.Date?.hasError}
-        {...getOverrideProps(overrides, "Date")}
-      ></TextField>
-      <TextField
-        label="Time"
-        isRequired={false}
-        isReadOnly={false}
-        value={Time}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              Date,
-              Time: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.Time ?? value;
-          }
-          if (errors.Time?.hasError) {
-            runValidationTasks("Time", value);
-          }
-          setTime(value);
-        }}
-        onBlur={() => runValidationTasks("Time", Time)}
-        errorMessage={errors.Time?.errorMessage}
-        hasError={errors.Time?.hasError}
-        {...getOverrideProps(overrides, "Time")}
+        onBlur={() => runValidationTasks("Timestamp", Timestamp)}
+        errorMessage={errors.Timestamp?.errorMessage}
+        hasError={errors.Timestamp?.hasError}
+        {...getOverrideProps(overrides, "Timestamp")}
       ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || sKGOPointLogModelProp)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -223,7 +200,10 @@ export default function LMSCreateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || sKGOPointLogModelProp) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>

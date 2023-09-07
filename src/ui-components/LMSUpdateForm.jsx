@@ -25,9 +25,11 @@ export default function LMSUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
+    name: "",
     Date: "",
     Time: "",
   };
+  const [name, setName] = React.useState(initialValues.name);
   const [Date, setDate] = React.useState(initialValues.Date);
   const [Time, setTime] = React.useState(initialValues.Time);
   const [errors, setErrors] = React.useState({});
@@ -35,6 +37,7 @@ export default function LMSUpdateForm(props) {
     const cleanValues = lMSRecord
       ? { ...initialValues, ...lMSRecord }
       : initialValues;
+    setName(cleanValues.name);
     setDate(cleanValues.Date);
     setTime(cleanValues.Time);
     setErrors({});
@@ -56,6 +59,7 @@ export default function LMSUpdateForm(props) {
   }, [idProp, lMSModelProp]);
   React.useEffect(resetStateValues, [lMSRecord]);
   const validations = {
+    name: [],
     Date: [],
     Time: [],
   };
@@ -85,6 +89,7 @@ export default function LMSUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
+          name: name ?? null,
           Date: Date ?? null,
           Time: Time ?? null,
         };
@@ -139,6 +144,32 @@ export default function LMSUpdateForm(props) {
       {...rest}
     >
       <TextField
+        label="Name"
+        isRequired={false}
+        isReadOnly={false}
+        value={name}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name: value,
+              Date,
+              Time,
+            };
+            const result = onChange(modelFields);
+            value = result?.name ?? value;
+          }
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
+          }
+          setName(value);
+        }}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
+      ></TextField>
+      <TextField
         label="Date"
         isRequired={false}
         isReadOnly={false}
@@ -147,6 +178,7 @@ export default function LMSUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              name,
               Date: value,
               Time,
             };
@@ -172,6 +204,7 @@ export default function LMSUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              name,
               Date,
               Time: value,
             };
