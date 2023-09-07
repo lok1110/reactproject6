@@ -4,14 +4,13 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 
 
 
-type SKGOPointLog @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
-  Timestamp: AWSDateTime!
+type SKGOPointLog @model {
+  id: ID! @auth(rules: [{ allow: owner }])
+  Timestamp: AWSDateTime! @auth(rules: [{ allow: owner }])
   PointDetails: [PointDetail]
 }
 
-
 type PointDetail {
-    PointName:String!
-    Value:String
+  PointName: String!
+  Value: String
 }

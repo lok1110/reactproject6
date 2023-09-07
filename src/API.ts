@@ -2,15 +2,8 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateSKGOPointLogInput = {
-  id?: string | null,
-  Timestamp: string,
-  PointDetails?: Array< PointDetailInput | null > | null,
-};
-
-export type PointDetailInput = {
-  PointName: string,
-  Value?: string | null,
+export type DeleteSKGOPointLogInput = {
+  id: string,
 };
 
 export type ModelSKGOPointLogConditionInput = {
@@ -76,14 +69,21 @@ export type PointDetail = {
   Value?: string | null,
 };
 
+export type CreateSKGOPointLogInput = {
+  id?: string | null,
+  Timestamp: string,
+  PointDetails?: Array< PointDetailInput | null > | null,
+};
+
+export type PointDetailInput = {
+  PointName: string,
+  Value?: string | null,
+};
+
 export type UpdateSKGOPointLogInput = {
   id: string,
   Timestamp?: string | null,
   PointDetails?: Array< PointDetailInput | null > | null,
-};
-
-export type DeleteSKGOPointLogInput = {
-  id: string,
 };
 
 export type ModelSKGOPointLogFilterInput = {
@@ -153,6 +153,27 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type DeleteSKGOPointLogMutationVariables = {
+  input: DeleteSKGOPointLogInput,
+  condition?: ModelSKGOPointLogConditionInput | null,
+};
+
+export type DeleteSKGOPointLogMutation = {
+  deleteSKGOPointLog?:  {
+    __typename: "SKGOPointLog",
+    id: string,
+    Timestamp: string,
+    PointDetails?:  Array< {
+      __typename: "PointDetail",
+      PointName: string,
+      Value?: string | null,
+    } | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type CreateSKGOPointLogMutationVariables = {
   input: CreateSKGOPointLogInput,
   condition?: ModelSKGOPointLogConditionInput | null,
@@ -181,27 +202,6 @@ export type UpdateSKGOPointLogMutationVariables = {
 
 export type UpdateSKGOPointLogMutation = {
   updateSKGOPointLog?:  {
-    __typename: "SKGOPointLog",
-    id: string,
-    Timestamp: string,
-    PointDetails?:  Array< {
-      __typename: "PointDetail",
-      PointName: string,
-      Value?: string | null,
-    } | null > | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type DeleteSKGOPointLogMutationVariables = {
-  input: DeleteSKGOPointLogInput,
-  condition?: ModelSKGOPointLogConditionInput | null,
-};
-
-export type DeleteSKGOPointLogMutation = {
-  deleteSKGOPointLog?:  {
     __typename: "SKGOPointLog",
     id: string,
     Timestamp: string,
