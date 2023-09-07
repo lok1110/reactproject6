@@ -5,7 +5,6 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import awsconfig from '../aws-exports';
-import Navbar from "../components/navbar/Navbar";
 import { useGlobalContext } from "../components/context/MyGlobalContext"; 
 
 Amplify.configure(awsconfig);

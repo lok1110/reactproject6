@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { API } from 'aws-amplify';
 import * as queries from '../graphql/queries';
-import * as mutations from '../graphql/mutations';
+
 import { GraphQLQuery } from '@aws-amplify/api';
 
 import { ListSKGOPointLogsQuery,  SKGOPointLog} from '../API';
@@ -83,6 +83,7 @@ const Test = () => {
   };
 
   return (
+
     <Flex direction='column'>
       <FormControl>
         <FormLabel>Start Date</FormLabel>

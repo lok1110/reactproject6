@@ -1,7 +1,6 @@
-import { Auth } from 'aws-amplify';
+
 import React, { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
 import { useGlobalContext } from '../components/context/MyGlobalContext'; 
 export interface IHomePageProps {}
 
