@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import LMS from './pages/LMS';
 import  Test from './pages/Test';
 import { createContext } from "react";
-import { MyGlobalContext } from './components/context/MyGlobalContext';
+
 
 
 
@@ -21,7 +21,7 @@ export interface IApp {}
 const App:React.FunctionComponent<IApp> = (props) =>{
     const [copy, setCopy] = useState<string|undefined>('abc')
     return(
-        <MyGlobalContext.Provider value= {{ copy, setCopy }}>
+      
         <BrowserRouter>
            
             <Routes>
@@ -36,7 +36,7 @@ const App:React.FunctionComponent<IApp> = (props) =>{
             </Routes>
            
         </BrowserRouter>
-        </MyGlobalContext.Provider>
+     
     );
 
 };
