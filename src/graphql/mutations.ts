@@ -17,6 +17,7 @@ export const createSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
       __typename
     }
   }
@@ -36,6 +37,7 @@ export const updateSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
       __typename
     }
   }
@@ -55,6 +57,7 @@ export const deleteSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
       __typename
     }
   }

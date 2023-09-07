@@ -67,6 +67,7 @@ export type SKGOPointLog = {
   PointDetails?:  Array<PointDetail | null > | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type PointDetail = {
@@ -169,6 +170,7 @@ export type CreateSKGOPointLogMutation = {
     } | null > | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -189,6 +191,7 @@ export type UpdateSKGOPointLogMutation = {
     } | null > | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -209,6 +212,7 @@ export type DeleteSKGOPointLogMutation = {
     } | null > | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -228,6 +232,7 @@ export type GetSKGOPointLogQuery = {
     } | null > | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -251,6 +256,7 @@ export type ListSKGOPointLogsQuery = {
       } | null > | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -258,6 +264,7 @@ export type ListSKGOPointLogsQuery = {
 
 export type OnCreateSKGOPointLogSubscriptionVariables = {
   filter?: ModelSubscriptionSKGOPointLogFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateSKGOPointLogSubscription = {
@@ -272,11 +279,13 @@ export type OnCreateSKGOPointLogSubscription = {
     } | null > | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateSKGOPointLogSubscriptionVariables = {
   filter?: ModelSubscriptionSKGOPointLogFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateSKGOPointLogSubscription = {
@@ -291,11 +300,13 @@ export type OnUpdateSKGOPointLogSubscription = {
     } | null > | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteSKGOPointLogSubscriptionVariables = {
   filter?: ModelSubscriptionSKGOPointLogFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteSKGOPointLogSubscription = {
@@ -310,5 +321,6 @@ export type OnDeleteSKGOPointLogSubscription = {
     } | null > | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };

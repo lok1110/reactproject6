@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "reactproject6",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authreactproject6adb48756",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

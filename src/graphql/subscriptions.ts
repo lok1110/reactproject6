@@ -5,8 +5,9 @@
 export const onCreateSKGOPointLog = /* GraphQL */ `
   subscription OnCreateSKGOPointLog(
     $filter: ModelSubscriptionSKGOPointLogFilterInput
+    $owner: String
   ) {
-    onCreateSKGOPointLog(filter: $filter) {
+    onCreateSKGOPointLog(filter: $filter, owner: $owner) {
       id
       Timestamp
       PointDetails {
@@ -16,6 +17,7 @@ export const onCreateSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
       __typename
     }
   }
@@ -23,8 +25,9 @@ export const onCreateSKGOPointLog = /* GraphQL */ `
 export const onUpdateSKGOPointLog = /* GraphQL */ `
   subscription OnUpdateSKGOPointLog(
     $filter: ModelSubscriptionSKGOPointLogFilterInput
+    $owner: String
   ) {
-    onUpdateSKGOPointLog(filter: $filter) {
+    onUpdateSKGOPointLog(filter: $filter, owner: $owner) {
       id
       Timestamp
       PointDetails {
@@ -34,6 +37,7 @@ export const onUpdateSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
       __typename
     }
   }
@@ -41,8 +45,9 @@ export const onUpdateSKGOPointLog = /* GraphQL */ `
 export const onDeleteSKGOPointLog = /* GraphQL */ `
   subscription OnDeleteSKGOPointLog(
     $filter: ModelSubscriptionSKGOPointLogFilterInput
+    $owner: String
   ) {
-    onDeleteSKGOPointLog(filter: $filter) {
+    onDeleteSKGOPointLog(filter: $filter, owner: $owner) {
       id
       Timestamp
       PointDetails {
@@ -52,6 +57,7 @@ export const onDeleteSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
       __typename
     }
   }
