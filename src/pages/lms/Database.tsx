@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { API } from 'aws-amplify';
-import * as queries from '../graphql/queries';
+import * as queries from '../../graphql/queries';
 
 import { GraphQLQuery } from '@aws-amplify/api';
 
-import { ListSKGOPointLogsQuery,  SKGOPointLog} from '../API';
+import { ListSKGOPointLogsQuery,  SKGOPointLog} from '../../API';
 
 import {
   Table,
@@ -22,9 +22,11 @@ import {
   FormLabel,
   FormHelperText,
   Input,
+  Container,
+  Center,
 } from '@chakra-ui/react'
 
-const Test = () => {
+const Database = () => {
 
   const [toLMS, setLMS] = useState<SKGOPointLog[]>([]);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
@@ -84,7 +86,10 @@ const Test = () => {
 
   return (
 
+    <Container>
+      
     <Flex direction='column'>
+    <Center w='100px' bg='green.500'>
       <FormControl>
         <FormLabel>Start Date</FormLabel>
         <Input type='date' onChange={(e) => setStartDate(e.target.value)} />
@@ -94,6 +99,7 @@ const Test = () => {
         <Input type='date' onChange={(e) => setEndDate(e.target.value)} />
       </FormControl>
       <Button onClick={handleSearch}>Search</Button>
+      </Center>
       <TableContainer>
         <Table size='sm' variant='striped'>
           <TableCaption>Imperial to metric conversion factors</TableCaption>
@@ -138,7 +144,8 @@ const Test = () => {
         </Table>
       </TableContainer>
     </Flex>
+    </Container>
   );
 };
 
-export default Test;
+export default Database;

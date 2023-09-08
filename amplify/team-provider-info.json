@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "reactproject6adb48756": {}
+        "reactproject6adb48756": {},
+        "userPoolGroups": {}
       },
       "api": {
         "reactproject6": {}

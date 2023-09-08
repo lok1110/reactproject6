@@ -4,9 +4,9 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 
 
 
-type SKGOPointLog @model {
-  id: ID! @auth(rules: [{ allow: owner }])
-  Timestamp: AWSDateTime! @auth(rules: [{ allow: owner }])
+type SKGOPointLog @model @auth(rules: [{allow: private}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  Timestamp: AWSDateTime!
   PointDetails: [PointDetail]
 }
 

@@ -2,26 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const deleteSKGOPointLog = /* GraphQL */ `
-  mutation DeleteSKGOPointLog(
-    $input: DeleteSKGOPointLogInput!
-    $condition: ModelSKGOPointLogConditionInput
-  ) {
-    deleteSKGOPointLog(input: $input, condition: $condition) {
-      id
-      Timestamp
-      PointDetails {
-        PointName
-        Value
-        __typename
-      }
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
 export const createSKGOPointLog = /* GraphQL */ `
   mutation CreateSKGOPointLog(
     $input: CreateSKGOPointLogInput!
@@ -37,7 +17,6 @@ export const createSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
       __typename
     }
   }
@@ -57,7 +36,25 @@ export const updateSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
+      __typename
+    }
+  }
+`;
+export const deleteSKGOPointLog = /* GraphQL */ `
+  mutation DeleteSKGOPointLog(
+    $input: DeleteSKGOPointLogInput!
+    $condition: ModelSKGOPointLogConditionInput
+  ) {
+    deleteSKGOPointLog(input: $input, condition: $condition) {
+      id
+      Timestamp
+      PointDetails {
+        PointName
+        Value
+        __typename
+      }
+      createdAt
+      updatedAt
       __typename
     }
   }

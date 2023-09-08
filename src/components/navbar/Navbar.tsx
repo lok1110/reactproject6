@@ -70,7 +70,7 @@ export const Navbar = () => {
               > <Link to="/Home">
                   <Button>Home</Button>
                 </Link>
-                <Link to="/LMS">
+                <Link to="/LMSupload">
                   <Button>LMS</Button>
                 </Link>
                 {/* <DocumentPopover />

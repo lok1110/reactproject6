@@ -1,14 +1,14 @@
 
 import './App.css';
-import React, { useState ,useEffect} from "react";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import LayoutComponent from './components/Layout';
+import LMSUpload from './pages/LMSUpload';
 import Login from './pages/Login';
-import LMS from './pages/LMS';
-import  Test from './pages/Test';
-import { createContext } from "react";
+import { LMSReport } from './pages/lms/LMSReport';
+
 
 
 
@@ -19,7 +19,7 @@ export interface IApp {}
 
 
 const App:React.FunctionComponent<IApp> = (props) =>{
-    const [copy, setCopy] = useState<string|undefined>('abc')
+  
     return(
       
         <BrowserRouter>
@@ -29,8 +29,8 @@ const App:React.FunctionComponent<IApp> = (props) =>{
                 <Route path ="/" element={<LayoutComponent/>}>
                     <Route index  element={<Home/>}/>
                     <Route path="/login"  element={<Login/>}/>
-                    <Route path="/lms"  element={<LMS/>}/>
-                    <Route path="/test"  element={<Test/>}/>
+                    <Route path="/lmsUpload"  element={<LMSUpload/>}/>
+                    <Route path="/lmReport"  element={<LMSReport/>}/>
                     <Route path=":number" element={<Profile/>}/>
                 </Route>
             </Routes>

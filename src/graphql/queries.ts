@@ -14,7 +14,6 @@ export const getSKGOPointLog = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
       __typename
     }
   }
@@ -36,7 +35,6 @@ export const listSKGOPointLogs = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
         __typename
       }
       nextToken

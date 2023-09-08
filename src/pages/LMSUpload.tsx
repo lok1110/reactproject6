@@ -1,16 +1,19 @@
 import React,{useState,useEffect} from "react";
-import { FileUploader,Collection,Image} from "@aws-amplify/ui-react";
+import { FileUploader} from "@aws-amplify/ui-react";
 import { Storage } from "aws-amplify";
 import {S3ProviderListOutputItem} from "@aws-amplify/storage"
 import "@aws-amplify/ui-react/styles.css"
 import "../App.css"
 import { Container ,Box} from "@chakra-ui/react";
-import  Test from "./Test";
+import Database from "./lms/Database";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { LMSReport } from "./lms/LMSReport";
 import {
     withAuthenticator,
   } from "@aws-amplify/ui-react";
-function LMS(){
+
+
+function LMSUpload(){
     const [imageKeys,setImageKeys] = useState<S3ProviderListOutputItem[]>([]);
     const [images,setImages] = useState<string[]>([]);
 
@@ -61,10 +64,10 @@ function LMS(){
     </Container>
     </TabPanel>
     <TabPanel>
-      <p>two!</p>
+      <LMSReport/>
     </TabPanel>
     <TabPanel>
-    <Test/>
+    <Database/>
     </TabPanel>
   </TabPanels>
 </Tabs>
@@ -75,4 +78,4 @@ function LMS(){
     )
 }
 
-export default withAuthenticator(LMS);
+export default withAuthenticator(LMSUpload);
