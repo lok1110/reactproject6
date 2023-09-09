@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from "react";
-import {useNavigate } from "react-router-dom";
 import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';

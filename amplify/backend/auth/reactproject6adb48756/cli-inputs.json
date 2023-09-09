@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "reactproject6adb48756_identitypool_adb48756",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "reactpadb48756",
     "userPoolName": "reactproject6adb48756_userpool_adb48756",
     "autoVerifiedAttributes": [
