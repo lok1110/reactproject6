@@ -16,6 +16,7 @@ import {
   Th,
   Td,
   Box,
+  Container,
 } from '@chakra-ui/react'
 
 
@@ -78,16 +79,17 @@ export const LMSReport = () => {
     //   return(b.format())
     // }
     return (
-      <div>
-      
+      <>
+      <Container>
          <Box w='40px' h='40px' > 
       
         <DatePicker 
           selected={selectedMonth}
           onChange={(date) => setSelectedMonth(date as Date)}
           dateFormat="MM/yyyy"
-
+          className="blue-border"
           showMonthYearPicker
+         
         />
         </Box>
     
@@ -95,13 +97,13 @@ export const LMSReport = () => {
         {/* Render the data here */}
         {toLMS.length > 0 && toLMSNext.length > 0 && (
           
-          <Box w='40px' h='40px' bg='yellow.200'>   
+          <Box w='400px' h='40px' bg='yellow.200'>   
             <Table size='sm' variant='striped'>
               <Thead>
                 <Tr>
                   <Th>Start Data:</Th>
                   <Th>End Date:</Th>
-                  <Th>Result :End Date - Start Date</Th>
+                  <Th>Result</Th>
                 </Tr>
 
 
@@ -130,10 +132,11 @@ export const LMSReport = () => {
                 </Tr>
               </Tbody>
             </Table>
-       </Box>
-         
+         `</Box>
+     
         )}
-      </div>
+      </Container>
+      </>
     )
   }
   
