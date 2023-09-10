@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { API } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
-
+import * as mutations from '../../graphql/mutations';
+import moment from 'moment';
 import { GraphQLQuery } from '@aws-amplify/api';
-
-import { ListSKGOPointLogsQuery,  SKGOPointLog} from '../../API';
+import { ListSKGOPointLogsQuery,  SKGOPointLog,DeleteSKGOPointLogMutation,DeleteSKGOPointLogInput} from '../../API';
 
 import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
@@ -20,10 +19,11 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  FormHelperText,
   Input,
   Container,
   Center,
+  SimpleGrid,
+  Box,
 } from '@chakra-ui/react'
 
 const Database = () => {
@@ -34,6 +34,8 @@ const Database = () => {
   const [startDate, setStartDate] = useState<string | undefined>();
   const [endDate, setEndDate] = useState<string | undefined>();
 
+
+  
   useEffect(() => {
     fetchData();
   }, []);
@@ -57,6 +59,31 @@ const Database = () => {
       console.log('error on fetching data', error);
     }
   }
+
+  async function deleteAllData() {
+    try {
+      // 获取所有数据的id
+      const allData = await API.graphql<GraphQLQuery<ListSKGOPointLogsQuery>>({ 
+        query: queries.listSKGOPointLogs
+       
+      }); 
+      const allIds = allData.data?.listSKGOPointLogs?.items.map(item => item?.id)|| [];
+      console.log(allIds)
+      // 循环删除每个数据
+      for (let id of allIds) {
+        const skgoPointLogDetails: DeleteSKGOPointLogInput = {
+          id: id!,
+        };
+        const deletedTodo = await API.graphql<GraphQLQuery<DeleteSKGOPointLogMutation>>({ 
+          query: mutations.deleteSKGOPointLog, 
+          variables: { input: skgoPointLogDetails }
+        });
+      }
+    } catch (error) {
+      console.log('error on deleting data', error);
+    }
+  }
+
 
   const handleSort = (column: string|undefined) => {
     if (sortColumn === column) {
@@ -82,14 +109,19 @@ const Database = () => {
 
   const handleSearch = () => {
     fetchData(startDate, endDate);
+
+
+    
   };
 
   return (
-
+  
     <Container>
-      
-    <Flex direction='column'>
-    <Center w='100px' bg='green.500'>
+      <SimpleGrid columns={2} spacing={10}>
+      <Box bg='white' h='400' border ='1px solid'>
+        <button onClick={deleteAllData}>del data</button>
+   
+   
       <FormControl>
         <FormLabel>Start Date</FormLabel>
         <Input type='date' onChange={(e) => setStartDate(e.target.value)} />
@@ -99,7 +131,10 @@ const Database = () => {
         <Input type='date' onChange={(e) => setEndDate(e.target.value)} />
       </FormControl>
       <Button onClick={handleSearch}>Search</Button>
-      </Center>
+     
+
+      </Box>
+      <Box bg='white' h='400' border ='1px solid'>
       <TableContainer>
         <Table size='sm' variant='striped'>
           <TableCaption>Imperial to metric conversion factors</TableCaption>
@@ -130,7 +165,7 @@ const Database = () => {
           <Tbody>
             {sortedData.map((lms, index) => (
               <Tr key={`lms-${index}`}>
-                <Td key={`date-${index}`}>{lms.Timestamp}</Td>
+                <Td key={`date-${index}`}>{moment(lms.Timestamp).format('MM-DD-YYYY')}</Td>
                 {lms.PointDetails?.map((PointDetail, index2) => (
                   <Td
                     key={`detail-${index}-${index2}`}
@@ -143,9 +178,12 @@ const Database = () => {
           </Tbody>
         </Table>
       </TableContainer>
-    </Flex>
+      </Box>
+    </SimpleGrid>
     </Container>
+   
   );
+  
 };
 
 export default Database;

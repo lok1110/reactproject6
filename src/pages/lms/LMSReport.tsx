@@ -11,23 +11,13 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
+
   Tr,
   Th,
   Td,
-  TableCaption,
-  TableContainer,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input,
-  Container,
-  Center,
-  Stack,
   Box,
 } from '@chakra-ui/react'
+
 
 
 export const LMSReport = () => {
@@ -83,7 +73,10 @@ export const LMSReport = () => {
     useEffect(() => {
       FetchDataMonthly();
     }, [selectedMonth]);
-  
+    // const a =(b:string)=>{
+    //   b= moment('2016-01-01'); 
+    //   return(b.format())
+    // }
     return (
       <div>
       
@@ -113,8 +106,8 @@ export const LMSReport = () => {
 
 
                 <Tr>
-                  <Td>{toLMS[0].Timestamp}</Td>
-                  <Td>{toLMSNext[0].Timestamp}</Td>
+                  <Td>{moment(toLMS[0].Timestamp).format('MM-DD-YYYY')}</Td>
+                  <Td>{moment(toLMSNext[0].Timestamp).format('MM-DD-YYYY')}</Td>
                   <Td></Td>
                 </Tr>
               </Thead>
